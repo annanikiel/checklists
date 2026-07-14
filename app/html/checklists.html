@@ -11,39 +11,33 @@
   <h1>Checklists</h1>
   <p class="hint">Select a checklist to run interactively.</p>
 
-  <a class="card" href="checklist.html?name=internal">
-    <strong>Internal</strong><br/>
-    <small>Pre-flight cockpit checks</small>
-  </a>
-
-  <a class="card" href="checklist.html?name=start">
-    <strong>Start</strong><br/>
-    <small>Engine start</small>
-  </a>
-
-  <a class="card" href="checklist.html?name=power_checks">
-    <strong>Power checks</strong><br/>
-    <small>Run-up / power check items</small>
-  </a>
-
-  <a class="card" href="checklist.html?name=pre_takeoff">
-    <strong>Pre-takeoff</strong><br/>
-    <small>Final checks before departure</small>
-  </a>
-
-  <a class="card" href="checklist.html?name=after_landing">
-    <strong>After landing</strong><br/>
-    <small>Post-landing flow</small>
-  </a>
-
-  <a class="card" href="checklist.html?name=fuelling">
-    <strong>Fuelling</strong><br/>
-    <small>Engine shutdown for refuelling</small>
-  </a>
-
-  <a class="card" href="checklist.html?name=shutdown">
-    <strong>Shutdown</strong><br/>
-    <small>Secure the aircraft</small>
-  </a>
+  <div id="list"></div>
+  <script>
+    const META = {
+      preflight:     { title: 'Preflight',      sub: 'External pre-flight checks' },
+      internal:      { title: 'Internal',        sub: 'Pre-flight cockpit checks' },
+      start:         { title: 'Start',           sub: 'Engine start' },
+      power_checks:  { title: 'Power checks',    sub: 'Run-up checks' },
+      pre_takeoff:   { title: 'Pre-takeoff',     sub: 'Before departure' },
+      after_landing: { title: 'After landing',   sub: 'Clear runway and tidy up' },
+      fuelling:      { title: 'Fuelling',        sub: 'Engine shutdown for refuelling' },
+      shutdown:      { title: 'Shutdown',        sub: 'Secure aircraft' },
+    };
+    const SEQUENCES = {
+      c150: ['internal','start','power_checks','pre_takeoff','after_landing','fuelling','shutdown'],
+      pa28: ['preflight','internal','start','power_checks','pre_takeoff','after_landing','fuelling','shutdown'],
+    };
+    const aircraft = localStorage.getItem('current_aircraft') || 'c150';
+    const seq = SEQUENCES[aircraft] || SEQUENCES.c150;
+    const list = document.getElementById('list');
+    seq.forEach(key => {
+      const m = META[key];
+      const a = document.createElement('a');
+      a.className = 'card';
+      a.href = `checklist.html?name=${key}`;
+      a.innerHTML = `<strong>${m.title}</strong><br/><small>${m.sub}</small>`;
+      list.appendChild(a);
+    });
+  </script>
 </body>
 </html>
