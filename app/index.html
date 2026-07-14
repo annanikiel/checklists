@@ -7,10 +7,84 @@
   <link rel="stylesheet" href="css/app.css">
 </head>
 <body>
-  <h2>Checklists</h2>
-<a class="card" href="html/checklists.html">
-  <strong>Interactive checklists</strong><br/>
-  <small>Run through procedures with tap-to-check items.</small>
-</a>
+  <div id="step-aircraft">
+    <h2>Select aircraft</h2>
+    <a class="card" id="pick-c150" href="#">
+      <strong>C150</strong><br/>
+      <small>Cessna 150</small>
+    </a>
+    <a class="card" id="pick-pa28" href="#">
+      <strong>PA28</strong><br/>
+      <small>Piper PA-28</small>
+    </a>
+  </div>
+
+  <div id="step-session" style="display:none">
+    <a id="back-aircraft" href="#" style="display:inline-block;margin-bottom:1rem;">← Back</a>
+    <h2>Continue?</h2>
+    <a class="card" id="pick-resume" href="#">
+      <strong>Resume latest flight</strong><br/>
+      <small>Continue where you left off</small>
+    </a>
+    <a class="card" id="pick-new" href="#">
+      <strong>New flight</strong><br/>
+      <small>Clear all checklists and start fresh</small>
+    </a>
+  </div>
+
+  <script>
+    const stepAircraft = document.getElementById('step-aircraft');
+    const stepSession = document.getElementById('step-session');
+
+    function hasSavedFlight(aircraft) {
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('checklist_' + aircraft + '_')) {
+          const state = JSON.parse(localStorage.getItem(key) || '{}');
+          if (Object.values(state).some(Boolean)) return true;
+        }
+      }
+      return false;
+    }
+
+    function clearFlight(aircraft) {
+      const keysToRemove = [];
+      for (let i = 0; i < localStorage.length; i++) {
+        const key = localStorage.key(i);
+        if (key && key.startsWith('checklist_' + aircraft + '_')) keysToRemove.push(key);
+      }
+      keysToRemove.forEach(k => localStorage.removeItem(k));
+    }
+
+    function pickAircraft(aircraft) {
+      localStorage.setItem('current_aircraft', aircraft);
+      if (hasSavedFlight(aircraft)) {
+        stepAircraft.style.display = 'none';
+        stepSession.style.display = '';
+      } else {
+        window.location.href = 'html/checklists.html';
+      }
+    }
+
+    document.getElementById('pick-c150').addEventListener('click', e => { e.preventDefault(); pickAircraft('c150'); });
+    document.getElementById('pick-pa28').addEventListener('click', e => { e.preventDefault(); pickAircraft('pa28'); });
+
+    document.getElementById('back-aircraft').addEventListener('click', e => {
+      e.preventDefault();
+      stepSession.style.display = 'none';
+      stepAircraft.style.display = '';
+    });
+
+    document.getElementById('pick-resume').addEventListener('click', e => {
+      e.preventDefault();
+      window.location.href = 'html/checklists.html';
+    });
+
+    document.getElementById('pick-new').addEventListener('click', e => {
+      e.preventDefault();
+      clearFlight(localStorage.getItem('current_aircraft'));
+      window.location.href = 'html/checklists.html';
+    });
+  </script>
 </body>
 </html>

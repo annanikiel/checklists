@@ -9,6 +9,12 @@ a:hover { opacity: 0.85; }
 
 h1, h2, h3 { margin-bottom: 0.4rem; }
 
+.hint {
+  color: #666;
+  font-size: 0.9rem;
+  margin-top: 0.5rem;
+}
+
 /* Cards (index + checklists hub) */
 a.card {
   display: block;
