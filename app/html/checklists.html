@@ -25,7 +25,7 @@
     };
     const SEQUENCES = {
       c150: ['internal','start','power_checks','pre_takeoff','after_landing','fuelling','shutdown'],
-      pa28: ['preflight','internal','start','power_checks','pre_takeoff','after_landing','fuelling','shutdown'],
+      pa28: ['preflight','internal','start','power_checks','pre_takeoff','after_landing','shutdown'],
     };
     const aircraft = localStorage.getItem('current_aircraft') || 'c150';
     const seq = SEQUENCES[aircraft] || SEQUENCES.c150;
