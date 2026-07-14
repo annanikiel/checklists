@@ -2,141 +2,283 @@
    Checklist data
    ========================= */
 
-const CHECKLISTS = {
-  internal: {
-    title: "Internal",
-    subtitle: "Pre-flight cockpit checks",
-    items: [
-      { label: "Passenger brief", action: "IF NEEDED" },
-      { label: "Seats", action: "ADJUSTED & LOCKED" },
-      { label: "Hatches & Harnesses", action: "CLOSED & FASTENED" },
-      { label: "Parking brake", action: "AS REQUIRED" },
-      { label: "Heaters & air vents", action: "CHECK" },
-      { label: "Instruments + Hobbs", action: "CHECK & NOTE" },
-      { label: "Radios", action: "OFF" },
-      { label: "Circuit breakers", action: "IN & SECURE" },
-      { label: "Flight Controls", action: "FREE, FULL, CORRECT" },
-      { label: "Trim", action: "FREE, FULL, CORRECT + TO" }
-    ]
+const ALL_CHECKLISTS = {
+  c150: {
+    internal: {
+      title: "Internal",
+      subtitle: "Pre-flight cockpit checks",
+      items: [
+        { label: "Passenger brief", action: "IF NEEDED" },
+        { label: "Seats", action: "ADJUSTED & LOCKED" },
+        { label: "Hatches & Harnesses", action: "CLOSED & FASTENED" },
+        { label: "Parking brake", action: "AS REQUIRED" },
+        { label: "Heaters & air vents", action: "CHECK" },
+        { label: "Instruments + Hobbs", action: "CHECK & NOTE" },
+        { label: "Radios", action: "OFF" },
+        { label: "Circuit breakers", action: "IN & SECURE" },
+        { label: "Flight Controls", action: "FREE, FULL, CORRECT" },
+        { label: "Trim", action: "FREE, FULL, CORRECT + TO" }
+      ]
+    },
+
+    start: {
+      title: "Start",
+      subtitle: "Engine start",
+      items: [
+        { label: "Cabin Air & Heater", action: "CLOSED" },
+        { label: "Throttle friction", action: "OPERATE, SET LOOSE" },
+        { label: "Throttle", action: "FULL, FREE, 1/2 INCH OPEN" },
+        { label: "Mixture", action: "FULL, FREE, RICH" },
+        { label: "Carburettor Heat", action: "FULL, FREE, COLD" },
+        { label: "Master Switch", action: "ON" },
+        { label: "Key", action: "IN" },
+        { label: "Beacon", action: "ON" },
+        { label: "Primer (if cold engine)", action: "PRIME & LOCK" },
+        { label: "Lookout", action: "'CLEAR PROP'" },
+        { label: "Magnetos", action: "BOTH" },
+        { label: "Starter", action: "ENGAGE" },
+        { label: "Memory items", action: "CARRY OUT" },
+        { label: "Ammeter", action: "CHARGING" },
+        { label: "Suction", action: "3-5 INCH" },
+        { label: "Magnetos", action: "DROP, NO STOP" },
+        { label: "Flaps", action: "UP, STAGES, SYMMETRY" },
+        { label: "Instruments (QNH, DI, AI)", action: "SET" },
+        { label: "Headset ANR", action: "SWITCH ON" },
+        { label: "Radios", action: "TUNE, ATIS, CALL" }
+      ]
+    },
+
+    power_checks: {
+      title: "Power checks",
+      subtitle: "Run-up checks",
+      items: [
+        { label: "Position", action: "INTO WIND" },
+        { label: "Parking brake", action: "CONSIDER" },
+        { label: "Throttle", action: "SET 1200rpm" },
+        { label: "Fuel", action: "ON, SUFFICIENT" },
+        { label: "Engine Ts & Ps", action: "IN THE GREEN" },
+        { label: "Throttle", action: "SET 1700rpm, CHECK BRAKES HOLDING" },
+        { label: "Carb Heat", action: "ON, DROP STEADY REVS, SET COLD" },
+        { label: "Magnetos", action: "MAX DROP 125rpm, MAX DIFF 50rpm" },
+        { label: "Engine Ts & Ps", action: "IN THE GREEN" },
+        { label: "Ammeter", action: "CHARGING" },
+        { label: "Suction", action: "3-5 INCH" },
+        { label: "Throttle", action: "CLOSE, 500 - 700rpm" },
+        { label: "Throttle", action: "SET 1200rpm" }
+      ]
+    },
+
+    pre_takeoff: {
+      title: "Pre-takeoff",
+      subtitle: "Before departure",
+      items: [
+        { label: "Trim", action: "SET TO" },
+        { label: "Throttle friction", action: "SET 'FINGER TIGHT'" },
+        { label: "Mixture", action: "RICH" },
+        { label: "Magnetos", action: "BOTH" },
+        { label: "Pitot Heat", action: "AS REQUIERED" },
+        { label: "Fuel", action: "ON, PRIMER LOCKED" },
+        { label: "Flaps", action: "AS REQUIRED" },
+        { label: "Hatches & Harnesses", action: "SECURE" },
+        { label: "Carb Heat", action: "COLD" },
+        { label: "Controls", action: "FULL, FREE" },
+        { label: "Transponder", action: "SET ALT" },
+        { label: "Lights", action: "AS REQUIRED" }
+      ]
+    },
+
+    after_landing: {
+      title: "After landing",
+      subtitle: "Clear runway and tidy up",
+      items: [
+        { label: "Runway vacated", action: "STOP, SET 1200rpm" },
+        { label: "Carb heat", action: "COLD" },
+        { label: "Pitot heat", action: "OFF" },
+        { label: "Flaps", action: "UP" },
+        { label: "Trim", action: "NEUTRAL" },
+        { label: "Throttle friction", action: "LOOSE" },
+        { label: "Electrics", action: "NON-ESSENTIAL OFF" },
+        { label: "Transponder", action: "AS REQUIRED" },
+        { label: "Radios", action: "NON-ESSENTIAL OFF" },
+      ]
+    },
+
+    fuelling: {
+      title: "Fuelling",
+      subtitle: "Engine shutdown for refuelling",
+      items: [
+        { label: "Throttle", action: "SET 1200 rpm" },
+        { label: "Magnetos", action: "CHECK" },
+        { label: "Radios", action: "OFF" },
+        { label: "Mixture", action: "IDLE CUT OFF" },
+        { label: "Magnetos", action: "OFF, KEY OUT" },
+        { label: "Electrics", action: "OFF" },
+        { label: "Master switch", action: "OFF" },
+        { label: "Fuel", action: "OFF" }
+      ]
+    },
+
+    shutdown: {
+      title: "Shutdown",
+      subtitle: "Secure aircraft",
+      items: [
+        { label: "Position", action: "INTO WIND" },
+        { label: "Parking brake", action: "AS REQUIRED" },
+        { label: "Throttle", action: "SET 1200rpm" },
+        { label: "Magnetos", action: "CHECK (NOTE DROP)" },
+        { label: "Radios", action: "OFF" },
+        { label: "Mixture", action: "IDLE CUT OFF" },
+        { label: "Magnetos", action: "OFF, KEY OUT" },
+        { label: "Electrics", action: "OFF" },
+        { label: "Master switch", action: "OFF" },
+        { label: "Fuel", action: "OFF" },
+        { label: "Hobbs", action: "NOTE" },
+        { label: "Hatches & Harnesses", action: "TIDY & SECURE" },
+        { label: "Aircraft", action: "SECURE, CONTROL LOCK" },
+      ]
+    }
   },
 
-  start: {
-    title: "Start",
-    subtitle: "Engine start",
-    items: [
-      { label: "Cabin Air & Heater", action: "CLOSED" },
-      { label: "Throttle friction", action: "OPERATE, SET LOOSE" },
-      { label: "Throttle", action: "FULL, FREE, 1/2 INCH OPEN" },
-      { label: "Mixture", action: "FULL, FREE, RICH" },
-      { label: "Carburettor Heat", action: "FULL, FREE, COLD" },
-      { label: "Master Switch", action: "ON" },
-      { label: "Key", action: "IN" },
-      { label: "Beacon", action: "ON" },
-      { label: "Primer (if cold engine)", action: "PRIME & LOCK" },
-      { label: "Lookout", action: "'CLEAR PROP'" },
-      { label: "Magnetos", action: "BOTH" },
-      { label: "Starter", action: "ENGAGE" },
-      { label: "Memory items", action: "CARRY OUT" },
-      { label: "Ammeter", action: "CHARGING" },
-      { label: "Suction", action: "3-5 INCH" },
-      { label: "Magnetos", action: "DROP, NO STOP" },
-      { label: "Flaps", action: "UP, STAGES, SYMMETRY" },
-      { label: "Instruments (QNH, DI, AI)", action: "SET" },
-      { label: "Headset ANR", action: "SWITCH ON" },
-      { label: "Radios", action: "TUNE, ATIS, CALL" }
-    ]
-  },
+  // PA28 placeholder — items mirror C150 until updated
+  pa28: {
+    internal: {
+      title: "Internal",
+      subtitle: "Pre-flight cockpit checks",
+      items: [
+        { label: "Passenger brief", action: "IF NEEDED" },
+        { label: "Seats", action: "ADJUSTED & LOCKED" },
+        { label: "Hatches & Harnesses", action: "CLOSED & FASTENED" },
+        { label: "Parking brake", action: "AS REQUIRED" },
+        { label: "Heaters & air vents", action: "CHECK" },
+        { label: "Instruments + Hobbs", action: "CHECK & NOTE" },
+        { label: "Radios", action: "OFF" },
+        { label: "Circuit breakers", action: "IN & SECURE" },
+        { label: "Flight Controls", action: "FREE, FULL, CORRECT" },
+        { label: "Trim", action: "FREE, FULL, CORRECT + TO" }
+      ]
+    },
 
-  power_checks: {
-    title: "Power checks",
-    subtitle: "Run-up checks",
-    items: [
-      { label: "Position", action: "INTO WIND" },
-      { label: "Parking brake", action: "CONSIDER" },
-      { label: "Throttle", action: "SET 1200rpm" },
-      { label: "Fuel", action: "ON, SUFFICIENT" },
-      { label: "Engine Ts & Ps", action: "IN THE GREEN" },
-      { label: "Throttle", action: "SET 1700rpm, CHECK BRAKES HOLDING" },
-      { label: "Carb Heat", action: "ON, DROP STEADY REVS, SET COLD" },
-      { label: "Magnetos", action: "MAX DROP 125rpm, MAX DIFF 50rpm" },
-      { label: "Engine Ts & Ps", action: "IN THE GREEN" },
-      { label: "Ammeter", action: "CHARGING" },
-      { label: "Suction", action: "3-5 INCH" },
-      { label: "Throttle", action: "CLOSE, 500 - 700rpm" },
-      { label: "Throttle", action: "SET 1200rpm" }
-    ]
-  },
+    start: {
+      title: "Start",
+      subtitle: "Engine start",
+      items: [
+        { label: "Cabin Air & Heater", action: "CLOSED" },
+        { label: "Throttle friction", action: "OPERATE, SET LOOSE" },
+        { label: "Throttle", action: "FULL, FREE, 1/2 INCH OPEN" },
+        { label: "Mixture", action: "FULL, FREE, RICH" },
+        { label: "Carburettor Heat", action: "FULL, FREE, COLD" },
+        { label: "Master Switch", action: "ON" },
+        { label: "Key", action: "IN" },
+        { label: "Beacon", action: "ON" },
+        { label: "Primer (if cold engine)", action: "PRIME & LOCK" },
+        { label: "Lookout", action: "'CLEAR PROP'" },
+        { label: "Magnetos", action: "BOTH" },
+        { label: "Starter", action: "ENGAGE" },
+        { label: "Memory items", action: "CARRY OUT" },
+        { label: "Ammeter", action: "CHARGING" },
+        { label: "Suction", action: "3-5 INCH" },
+        { label: "Magnetos", action: "DROP, NO STOP" },
+        { label: "Flaps", action: "UP, STAGES, SYMMETRY" },
+        { label: "Instruments (QNH, DI, AI)", action: "SET" },
+        { label: "Headset ANR", action: "SWITCH ON" },
+        { label: "Radios", action: "TUNE, ATIS, CALL" }
+      ]
+    },
 
-  pre_takeoff: {
-    title: "Pre-takeoff",
-    subtitle: "Before departure",
-    items: [
-      { label: "Trim", action: "SET TO" },
-      { label: "Throttle friction", action: "SET 'FINGER TIGHT'" },
-      { label: "Mixture", action: "RICH" },
-      { label: "Magnetos", action: "BOTH" },
-      { label: "Pitot Heat", action: "AS REQUIERED" },
-      { label: "Fuel", action: "ON, PRIMER LOCKED" },
-      { label: "Flaps", action: "AS REQUIRED" },
-      { label: "Hatches & Harnesses", action: "SECURE" },
-      { label: "Carb Heat", action: "COLD" },
-      { label: "Controls", action: "FULL, FREE" },
-      { label: "Transponder", action: "SET ALT" },
-      { label: "Lights", action: "AS REQUIRED" }
-    ]
-  },
+    power_checks: {
+      title: "Power checks",
+      subtitle: "Run-up checks",
+      items: [
+        { label: "Position", action: "INTO WIND" },
+        { label: "Parking brake", action: "CONSIDER" },
+        { label: "Throttle", action: "SET 1200rpm" },
+        { label: "Fuel", action: "ON, SUFFICIENT" },
+        { label: "Engine Ts & Ps", action: "IN THE GREEN" },
+        { label: "Throttle", action: "SET 1700rpm, CHECK BRAKES HOLDING" },
+        { label: "Carb Heat", action: "ON, DROP STEADY REVS, SET COLD" },
+        { label: "Magnetos", action: "MAX DROP 125rpm, MAX DIFF 50rpm" },
+        { label: "Engine Ts & Ps", action: "IN THE GREEN" },
+        { label: "Ammeter", action: "CHARGING" },
+        { label: "Suction", action: "3-5 INCH" },
+        { label: "Throttle", action: "CLOSE, 500 - 700rpm" },
+        { label: "Throttle", action: "SET 1200rpm" }
+      ]
+    },
 
-  after_landing: {
-    title: "After landing",
-    subtitle: "Clear runway and tidy up",
-    items: [
-      { label: "Runway vacated", action: "STOP, SET 1200rpm" },
-      { label: "Carb heat", action: "COLD" },
-      { label: "Pitot heat", action: "OFF" },
-      { label: "Flaps", action: "UP" },
-      { label: "Trim", action: "NEUTRAL" },
-      { label: "Throttle friction", action: "LOOSE" },
-      { label: "Electrics", action: "NON-ESSENTIAL OFF" },
-      { label: "Transponder", action: "AS REQUIRED" },
-      { label: "Radios", action: "NON-ESSENTIAL OFF" },
-    ]
-  },
+    pre_takeoff: {
+      title: "Pre-takeoff",
+      subtitle: "Before departure",
+      items: [
+        { label: "Trim", action: "SET TO" },
+        { label: "Throttle friction", action: "SET 'FINGER TIGHT'" },
+        { label: "Mixture", action: "RICH" },
+        { label: "Magnetos", action: "BOTH" },
+        { label: "Pitot Heat", action: "AS REQUIERED" },
+        { label: "Fuel", action: "ON, PRIMER LOCKED" },
+        { label: "Flaps", action: "AS REQUIRED" },
+        { label: "Hatches & Harnesses", action: "SECURE" },
+        { label: "Carb Heat", action: "COLD" },
+        { label: "Controls", action: "FULL, FREE" },
+        { label: "Transponder", action: "SET ALT" },
+        { label: "Lights", action: "AS REQUIRED" }
+      ]
+    },
 
-  fuelling: {
-    title: "Fuelling",
-    subtitle: "Engine shutdown for refuelling",
-    items: [
-      { label: "Throttle", action: "SET 1200 rpm" },
-      { label: "Magnetos", action: "CHECK" },
-      { label: "Radios", action: "OFF" },
-      { label: "Mixture", action: "IDLE CUT OFF" },
-      { label: "Magnetos", action: "OFF, KEY OUT" },
-      { label: "Electrics", action: "OFF" },
-      { label: "Master switch", action: "OFF" },
-      { label: "Fuel", action: "OFF" }
-    ]
-  },
+    after_landing: {
+      title: "After landing",
+      subtitle: "Clear runway and tidy up",
+      items: [
+        { label: "Runway vacated", action: "STOP, SET 1200rpm" },
+        { label: "Carb heat", action: "COLD" },
+        { label: "Pitot heat", action: "OFF" },
+        { label: "Flaps", action: "UP" },
+        { label: "Trim", action: "NEUTRAL" },
+        { label: "Throttle friction", action: "LOOSE" },
+        { label: "Electrics", action: "NON-ESSENTIAL OFF" },
+        { label: "Transponder", action: "AS REQUIRED" },
+        { label: "Radios", action: "NON-ESSENTIAL OFF" },
+      ]
+    },
 
-  shutdown: {
-    title: "Shutdown",
-    subtitle: "Secure aircraft",
-    items: [
-      { label: "Position", action: "INTO WIND" },
-      { label: "Parking brake", action: "AS REQUIRED" },
-      { label: "Throttle", action: "SET 1200rpm" },
-      { label: "Magnetos", action: "CHECK (NOTE DROP)" },
-      { label: "Radios", action: "OFF" },
-      { label: "Mixture", action: "IDLE CUT OFF" },
-      { label: "Magnetos", action: "OFF, KEY OUT" },
-      { label: "Electrics", action: "OFF" },
-      { label: "Master switch", action: "OFF" },
-      { label: "Fuel", action: "OFF" },
-      { label: "Hobbs", action: "NOTE" },
-      { label: "Hatches & Harnesses", action: "TIDY & SECURE" },
-      { label: "Aircraft", action: "SECURE, CONTROL LOCK" },
-    ]
+    fuelling: {
+      title: "Fuelling",
+      subtitle: "Engine shutdown for refuelling",
+      items: [
+        { label: "Throttle", action: "SET 1200 rpm" },
+        { label: "Magnetos", action: "CHECK" },
+        { label: "Radios", action: "OFF" },
+        { label: "Mixture", action: "IDLE CUT OFF" },
+        { label: "Magnetos", action: "OFF, KEY OUT" },
+        { label: "Electrics", action: "OFF" },
+        { label: "Master switch", action: "OFF" },
+        { label: "Fuel", action: "OFF" }
+      ]
+    },
+
+    shutdown: {
+      title: "Shutdown",
+      subtitle: "Secure aircraft",
+      items: [
+        { label: "Position", action: "INTO WIND" },
+        { label: "Parking brake", action: "AS REQUIRED" },
+        { label: "Throttle", action: "SET 1200rpm" },
+        { label: "Magnetos", action: "CHECK (NOTE DROP)" },
+        { label: "Radios", action: "OFF" },
+        { label: "Mixture", action: "IDLE CUT OFF" },
+        { label: "Magnetos", action: "OFF, KEY OUT" },
+        { label: "Electrics", action: "OFF" },
+        { label: "Master switch", action: "OFF" },
+        { label: "Fuel", action: "OFF" },
+        { label: "Hobbs", action: "NOTE" },
+        { label: "Hatches & Harnesses", action: "TIDY & SECURE" },
+        { label: "Aircraft", action: "SECURE, CONTROL LOCK" },
+      ]
+    }
   }
 };
+
+const aircraft = localStorage.getItem('current_aircraft') || 'c150';
+const CHECKLISTS = ALL_CHECKLISTS[aircraft];
 
 const CHECKLIST_SEQUENCE = [
   "internal",
@@ -178,8 +320,7 @@ function createItem({ label, action }, checklistName, itemIndex) {
 
   checkbox.addEventListener("change", () => {
     sync();
-    // Save state to localStorage
-    const key = `checklist_${checklistName}`;
+    const key = `checklist_${aircraft}_${checklistName}`;
     const state = JSON.parse(localStorage.getItem(key) || '{}');
     state[itemIndex] = checkbox.checked;
     localStorage.setItem(key, JSON.stringify(state));
@@ -234,7 +375,6 @@ function renderNextLink(currentName) {
 
   const nextName = CHECKLIST_SEQUENCE[idx + 1];
   if (!nextName || !CHECKLISTS[nextName]) {
-    // End of sequence: show nothing (or show "Back to checklists" if you want)
     wrap.innerHTML = `<a class="card" href="checklists.html"><strong>Back to checklists</strong></a>`;
     return;
   }
@@ -270,24 +410,24 @@ if (!checklist) {
   titleEl.textContent = checklist.title;
   subtitleEl.textContent = checklist.subtitle;
 
-  // Create checklist items
   checklist.items.forEach((item, index) => {
     listEl.appendChild(createItem(item, name, index));
   });
 
-  // If on shutdown and came from fuelling, pre-tick common items (3-10)
-  if (name === "shutdown" && from === "fuelling") {
-    const fuellingState = JSON.parse(localStorage.getItem('checklist_fuelling') || '{}');
-    const checkboxes = listEl.querySelectorAll("input[type='checkbox']");
+  // Restore saved state, or fall back to fuelling→shutdown pre-population
+  const savedState = JSON.parse(localStorage.getItem(`checklist_${aircraft}_${name}`) || '{}');
+  const hasSavedState = Object.keys(savedState).length > 0;
+  const checkboxes = listEl.querySelectorAll("input[type='checkbox']");
 
-    // Mapping: fuelling items to shutdown items (3-10, indices 2-9)
-    // Fuelling[0] (Throttle) -> Shutdown[2]
-    // Fuelling[1] (Magnetos CHECK) -> Shutdown[3]
-    // Fuelling[2] (Radios) -> Shutdown[4]
-    // Fuelling[3] (Mixture) -> Shutdown[5]
-    // Fuelling[4] (Magnetos OFF) -> Shutdown[6]
-    // Fuelling[5] (Master switch) -> Shutdown[8]
-    // Fuelling[6] (Fuel) -> Shutdown[9]
+  if (hasSavedState) {
+    checkboxes.forEach((cb, i) => {
+      if (savedState[i]) {
+        cb.checked = true;
+        cb.dispatchEvent(new Event("change"));
+      }
+    });
+  } else if (name === "shutdown" && from === "fuelling") {
+    const fuellingState = JSON.parse(localStorage.getItem(`checklist_${aircraft}_fuelling`) || '{}');
 
     const mapping = {
       0: 2,  // Throttle
@@ -295,7 +435,7 @@ if (!checklist) {
       2: 4,  // Radios
       3: 5,  // Mixture
       4: 6,  // Magnetos OFF
-      5: 7,  // Electrics OFF 
+      5: 7,  // Electrics OFF
       6: 8,  // Master switch
       7: 9   // Fuel
     };
@@ -308,7 +448,7 @@ if (!checklist) {
     });
   }
 
-   renderNextLink(name);
+  renderNextLink(name);
 }
 
 resetBtn.addEventListener("click", () => {

@@ -27,35 +27,6 @@ a.card {
 }
 a.card:hover { border-color: #aaa; }
 
-/* Grid layout used on radials page */
-.row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1rem;
-  align-items: start;
-}
-.panel.point { grid-column: 1 / -1; }
-
-@media (max-width: 820px) {
-  .row { grid-template-columns: 1fr; }
-  .panel.point { grid-column: auto; }
-}
-
-/* Inputs */
-label {
-  display: block;
-  font-size: 0.9rem;
-  margin-top: 0.6rem;
-}
-
-input, select {
-  width: 100%;
-  padding: 0.5rem;
-  border: 1px solid #ccc;
-  border-radius: 10px;
-  background: white;
-}
-
 button {
   margin-top: 1rem;
   padding: 0.6rem 0.9rem;
@@ -65,34 +36,6 @@ button {
   cursor: pointer;
 }
 button:hover { border-color: #bbb; }
-
-/* Map */
-#map {
-  height: 520px;
-  border-radius: 14px;
-  margin-top: 1rem;
-}
-
-/* Radial result emphasis */
-.resultBox {
-  margin-top: 0.75rem;
-  padding: 0.9rem;
-  border: 1px solid #e2e2e2;
-  border-radius: 14px;
-  background: #fafafa;
-}
-.radialValue {
-  font-size: 1.4rem;
-  font-weight: 700;
-}
-.radialLabel {
-  color: #666;
-  font-size: 0.9rem;
-}
-.smallMeta {
-  color: #666;
-  font-size: 0.85rem;
-}
 
 /* Checklist styles */
 .list {
