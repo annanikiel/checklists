@@ -258,21 +258,6 @@ const ALL_CHECKLISTS = {
       ]
     },
 
-    fuelling: {
-      title: "Fuelling",
-      subtitle: "Engine shutdown for refuelling",
-      items: [
-        { label: "Throttle", action: "SET 1200 rpm" },
-        { label: "Magnetos", action: "CHECK" },
-        { label: "Radios", action: "OFF" },
-        { label: "Mixture", action: "IDLE CUT OFF" },
-        { label: "Magnetos", action: "OFF, KEY OUT" },
-        { label: "Electrics", action: "OFF" },
-        { label: "Master switch", action: "OFF" },
-        { label: "Fuel", action: "OFF" }
-      ]
-    },
-
     shutdown: {
       title: "Shutdown",
       subtitle: "Secure aircraft",
@@ -300,7 +285,7 @@ const CHECKLISTS = ALL_CHECKLISTS[aircraft];
 
 const CHECKLIST_SEQUENCES = {
   c150: ["internal", "start", "power_checks", "pre_takeoff", "after_landing", "fuelling", "shutdown"],
-  pa28: ["preflight", "internal", "start", "power_checks", "pre_takeoff", "after_landing", "fuelling", "shutdown"],
+  pa28: ["preflight", "internal", "start", "power_checks", "pre_takeoff", "after_landing", "shutdown"],
 };
 const CHECKLIST_SEQUENCE = CHECKLIST_SEQUENCES[aircraft] || CHECKLIST_SEQUENCES.c150;
 
@@ -361,8 +346,8 @@ function renderNextLink(currentName) {
     return;
   }
 
-  // Special case: after_landing has two next options (fuelling or shutdown)
-  if (currentName === "after_landing") {
+  // Special case: after_landing branches to fuelling or shutdown (C150 only)
+  if (currentName === "after_landing" && CHECKLIST_SEQUENCE.includes("fuelling")) {
     wrap.innerHTML = `
       <a class="card" href="checklist.html?name=fuelling">
         <strong>Next: Fuelling</strong><br/>
