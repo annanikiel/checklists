@@ -139,8 +139,25 @@ const ALL_CHECKLISTS = {
     }
   },
 
-  // PA28 placeholder — items mirror C150 until updated
   pa28: {
+    preflight: {
+      title: "Preflight",
+      subtitle: "External pre-flight checks",
+      items: [
+        { label: "Avionics",          action: "OFF" },
+        { label: "Parking brake",     action: "ON" },
+        { label: "Magnetos",          action: "OFF" },
+        { label: "Master switch",     action: "ON" },
+        { label: "Annunciator panel", action: "CHECK" },
+        { label: "Fuel",              action: "ON LOWER" },
+        { label: "Lights & Pitot",    action: "ON & CHECK" },
+        { label: "Window",            action: "OPEN" },
+        { label: "Stall warner",      action: "CHECK" },
+        { label: "Switches",          action: "OFF" },
+        { label: "Master switch",     action: "OFF" },
+      ]
+    },
+
     internal: {
       title: "Internal",
       subtitle: "Pre-flight cockpit checks",
@@ -280,15 +297,11 @@ const ALL_CHECKLISTS = {
 const aircraft = localStorage.getItem('current_aircraft') || 'c150';
 const CHECKLISTS = ALL_CHECKLISTS[aircraft];
 
-const CHECKLIST_SEQUENCE = [
-  "internal",
-  "start",
-  "power_checks",
-  "pre_takeoff",
-  "after_landing",
-  "fuelling",
-  "shutdown"
-];
+const CHECKLIST_SEQUENCES = {
+  c150: ["internal", "start", "power_checks", "pre_takeoff", "after_landing", "fuelling", "shutdown"],
+  pa28: ["preflight", "internal", "start", "power_checks", "pre_takeoff", "after_landing", "fuelling", "shutdown"],
+};
+const CHECKLIST_SEQUENCE = CHECKLIST_SEQUENCES[aircraft] || CHECKLIST_SEQUENCES.c150;
 
 /* =========================
    Helpers
